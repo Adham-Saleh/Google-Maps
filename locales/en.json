@@ -1,0 +1,9 @@
+{
+  "location": "location",
+  "chooseLocation": "choose location",
+  "longitude": "Longitude",
+  "latitude": "Latitude",
+  "country": "Country",
+  "state": "State",
+  "submit": "Submit"
+}
