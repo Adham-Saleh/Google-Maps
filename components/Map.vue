@@ -5,6 +5,7 @@
             mapId="DEMO_MAP_ID"
             style="width: 100%; height: 500px"
             :center="center"
+            :options="mapOptions"
             @click='handleMapClick'
             :zoom="3")
             Marker(:options='markerOptions')
@@ -18,6 +19,9 @@ const longitude = ref<number>(25);
 
 const center = ref({ lng: longitude.value, lat: latitude.value });
 const markerOptions = ref({ position: center.value });
+const mapOptions = ref({
+  language: "ar", // Set the language here
+});
 
 const emit = defineEmits(["markerChange"]);
 const handleMapClick = function (event: any) {

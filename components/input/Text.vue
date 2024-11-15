@@ -1,17 +1,18 @@
 <template lang="pug">
     //- pre {{errorBag}}
     //- pre {{bindingOptions}}
-    label.form-label.ms-2 {{label}} 
-    input.form-control.p-2.rounded-4(:placeholder='placeholder' v-modal='inputText' v-bind='validationValue' :class="{'input-error': getError(bindingOptions)}" :value='value')
+    //- pre {{locationFormSchema}}
+    label.form-label.ms-2(:class="{'error-label': getError(bindingOptions)}" style="font-size: 15px;") {{label}} 
+    input.form-control.p-2.rounded-4(:placeholder='placeholder' v-bind='validationValue' :class="{'input-error': getError(bindingOptions)}")
     p.text-danger.ms-2.error-label(v-if="getError(bindingOptions)") {{getError(bindingOptions)}}
 </template>
 
 <script setup lang="ts">
-import { locationFormSchema } from "~/schema/formSchema";
+import { locationForm } from "~/schema/formSchema";
 
-const inputText = ref();
+const locationFormSchema = locationForm();
 
-const props = defineProps(["label", "placeholder", "bindingOptions", "value"]);
+const props = defineProps(["label", "placeholder", "bindingOptions"]);
 
 const { defineInputBinds, values, errorBag, handleSubmit } = useForm({
   validationSchema: locationFormSchema,
@@ -32,6 +33,7 @@ const getError = function (name: string) {
 
 .error-label {
   font-size: 12px;
+  color: red;
 }
 
 .input-error {

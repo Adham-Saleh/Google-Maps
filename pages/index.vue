@@ -23,16 +23,16 @@
                         .col-md-12.mt-3
                             button.btn.btn-success.rounded-4.w-100.p-2 {{t('submit')}}
                     .row.mt-2
-                        .col-md-6
+                        .col-md-12(v-for="lang in availableLocales" :key="lang")
                             .rounded-4.text-center
-                                button.btn.btn-outline-secondary.w-100.m-0.rounded-4(type='button' @click="switchLanguage('en')") English
-                        .col-md-6
-                            .rounded-4.text-center.border.border-2-rounded-4
-                                button.btn.btn-outline-secondary.w-100.m-0.rounded-4(type='button' @click="switchLanguage('ar')") العربيه
+                                NuxtLink.btn.btn-outline-secondary.w-100.m-0.rounded-4(@click="switchLang(lang.code)") {{lang.name}}
 </template>
 
 <script lang="ts" setup>
-const { t, locale } = useI18n();
+const { t, locale, locales } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+
+const router = useRouter();
 
 const lng = ref<number>(25);
 const lat = ref<number>(25);
@@ -43,11 +43,14 @@ const updateCenter = function (center: any) {
   lat.value = center.value.lat;
 };
 
-const switchLanguage = function (loc: String) {
-  locale.value = loc;
-  console.log(locale.value);
-  console.log(t("location"));
+const switchLang = function (loc: String) {
+  const newPath = switchLocalePath(loc);
+  router.push(newPath);
 };
+
+const availableLocales = computed(() => {
+  return locales.value.filter((i: any) => i.code !== locale.value);
+});
 </script>
 
 <style scoped></style>

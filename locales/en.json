@@ -5,5 +5,10 @@
   "latitude": "Latitude",
   "country": "Country",
   "state": "State",
-  "submit": "Submit"
+  "submit": "Submit",
+  "locationError": "Location must be a combination of legal alphabetical letters A-Z",
+  "longitudeError": "Longitude must be a number",
+  "latitudeError": "Latitude must be a number",
+  "countryError": "Country must be a combination of legal alphabetical letters A-Z",
+  "stateError": "State must be a combination of legal alphabetical letters A-Z"
 }
